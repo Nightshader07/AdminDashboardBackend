@@ -2,7 +2,7 @@
 
 namespace AdminDashboard.models;
 
-public class RepresentantEntreprise
+public class RepresentantEntreprise : Utilisateur
 {
     [Url]
     public string LogoURL { get; set; }

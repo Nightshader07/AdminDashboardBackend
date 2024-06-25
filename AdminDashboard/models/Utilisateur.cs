@@ -7,7 +7,7 @@ public class Utilisateur
 {
     [Key]
     [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-    private long Id { get; set; }
+    public long Id { get; set; }
     
     [Required]
     private String Username { get; set; }
