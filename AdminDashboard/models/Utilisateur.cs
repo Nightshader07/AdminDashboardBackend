@@ -10,15 +10,15 @@ public class Utilisateur
     public long Id { get; set; }
     
     [Required]
-    private String Username { get; set; }
+    public String Username { get; set; }
     
     [Required]
-    private String Password { get; set; }
+    public String Password { get; set; }
     
     [Required]
     [EmailAddress]
-    private String Email { get; set; }
+    public String Email { get; set; }
     
     [Phone]
-    private String PhoneNumber { get; set; }
+    public String PhoneNumber { get; set; }
 }

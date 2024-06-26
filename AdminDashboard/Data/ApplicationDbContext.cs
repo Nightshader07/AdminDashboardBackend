@@ -15,11 +15,24 @@ namespace AdminDashboard.Data;
         public DbSet<RepresentantEntreprise> RepresentantEntreprises { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            
             base.OnModelCreating(modelBuilder);
-            modelBuilder.Entity<Utilisateur>(entity =>
-            {
-                entity.HasKey(e => e.Id); // Ensure Id is configured as primary key
-                
-            });
+
+            // Map the base class to a table
+            modelBuilder.Entity<Utilisateur>()
+                .ToTable("Utilisateurs");
+
+            // Map derived classes to separate tables
+            modelBuilder.Entity<RepresentantEntreprise>()
+                .ToTable("RepresentantEntreprises")
+                .HasBaseType<Utilisateur>();
+
+            modelBuilder.Entity<Employe>()
+                .ToTable("Employes")
+                .HasBaseType<Utilisateur>();
+
+            modelBuilder.Entity<AdminGenerale>()
+                .ToTable("AdminGenerales")
+                .HasBaseType<Utilisateur>();
         }
     }
