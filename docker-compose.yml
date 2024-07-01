@@ -1,0 +1,6 @@
+﻿services:
+  admindashboard:
+    image: admindashboard
+    build:
+      context: .
+      dockerfile: AdminDashboard/Dockerfile
