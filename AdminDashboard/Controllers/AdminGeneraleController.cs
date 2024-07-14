@@ -8,31 +8,31 @@ namespace AdminDashboard.Controllers
     [ApiController]
     public class AdminGeneraleController : ControllerBase
     {
-        private readonly IAdminGeneraleRepository _adminGeneraleRepository;
+        private readonly IAdminGenerale _adminGenerale;
 
-        public AdminGeneraleController(IAdminGeneraleRepository adminGeneraleRepository)
+        public AdminGeneraleController(IAdminGenerale adminGenerale)
         {
-            _adminGeneraleRepository = adminGeneraleRepository;
+            _adminGenerale = adminGenerale;
         }
 
         [Route("[action]")]
         [HttpGet]
         public IActionResult GetAll()
         {
-            return Ok(_adminGeneraleRepository.GetAll());
+            return Ok(_adminGenerale.GetAll());
         }
 
         [HttpGet("{id}")]
         public IActionResult GetById(long id)
         {
-            return Ok(_adminGeneraleRepository.GetById(id));
+            return Ok(_adminGenerale.GetById(id));
         }
 
         [Route("[action]")]
         [HttpPost]
         public IActionResult Add([FromForm]AdminGenerale adminGenerale)
         {
-            AdminGenerale? newAdminGenerale = _adminGeneraleRepository.Add(adminGenerale);
+            AdminGenerale? newAdminGenerale = _adminGenerale.Add(adminGenerale);
             if (newAdminGenerale == null)
             {
                 return BadRequest();
@@ -44,7 +44,7 @@ namespace AdminDashboard.Controllers
         [HttpPut]
         public IActionResult Update([FromForm]AdminGenerale adminGenerale)
         {
-            AdminGenerale? updatedAdminGenerale = _adminGeneraleRepository.Update(adminGenerale);
+            AdminGenerale? updatedAdminGenerale = _adminGenerale.Update(adminGenerale);
             if (updatedAdminGenerale == null)
             {
                 return BadRequest();
@@ -56,7 +56,7 @@ namespace AdminDashboard.Controllers
         [HttpDelete]
         public IActionResult Remove(long id)
         {
-            AdminGenerale? removedAdminGenerale = _adminGeneraleRepository.RemoveById(id);
+            AdminGenerale? removedAdminGenerale = _adminGenerale.RemoveById(id);
             if (removedAdminGenerale == null)
             {
                 return BadRequest();
@@ -67,7 +67,7 @@ namespace AdminDashboard.Controllers
         [HttpGet("[action]")]
         public IActionResult Authentification([FromQuery]string email, [FromQuery]string password)
         {
-            var adminGenerale = _adminGeneraleRepository.Authentificate(email, password);
+            var adminGenerale = _adminGenerale.Authentificate(email, password);
             if (adminGenerale == null)
             {
                 return Unauthorized(); 

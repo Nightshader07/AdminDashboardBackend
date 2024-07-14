@@ -1,4 +1,5 @@
 ﻿using AdminDashboard.Data;
+using AdminDashboard.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
 namespace AdminDashboard.Controllers;
@@ -6,23 +7,22 @@ namespace AdminDashboard.Controllers;
 [ApiController]
 public class UtilisateurController : ControllerBase
 {
-    private readonly ApplicationDbContext _context;
-    public UtilisateurController(ApplicationDbContext context)
+    private readonly IUtilisateur _utilisateur;
+    public UtilisateurController(IUtilisateur utilisateur)
     {
-        _context = context;
+        _utilisateur = utilisateur;
     }
 
-    [HttpGet]
+    [HttpGet("[action]")]
     public IActionResult GetAll()
     {
-        var utilisateurs = _context.Utilisateurs.ToList();
-        return Ok(utilisateurs);
+        return Ok(_utilisateur.GetAll());
     }
     
     [HttpGet("{id}")]
     public IActionResult GetById([FromRoute] long id)
     {
-        var utilisateur =  _context.Utilisateurs.Find(id); 
+        var utilisateur =  _utilisateur.GetById(id); 
         if (utilisateur == null)
         {
             return NotFound();
@@ -31,5 +31,16 @@ public class UtilisateurController : ControllerBase
         {
             return Ok(utilisateur);
         }
+    }
+    [HttpGet("[action]")]
+    public IActionResult Authentification([FromQuery]string email, [FromQuery]string password)
+    {
+        var utilisateur = _utilisateur.Authentificate(email, password);
+        if (utilisateur == null)
+        {
+            return Unauthorized(); 
+        }
+
+        return Ok(utilisateur);
     }
 }

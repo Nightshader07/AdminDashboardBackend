@@ -2,7 +2,7 @@ using AdminDashboard.models;
 
 namespace AdminDashboard.Interfaces
 {
-    public interface IAdminGeneraleRepository
+    public interface IAdminGenerale
     {
         List<AdminGenerale> GetAll();
         AdminGenerale GetByEmail(string email);
