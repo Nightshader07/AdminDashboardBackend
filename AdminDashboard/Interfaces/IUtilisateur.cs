@@ -1,4 +1,5 @@
-﻿using AdminDashboard.models;
+﻿using AdminDashboard.DTOs;
+using AdminDashboard.models;
 
 namespace AdminDashboard.Interfaces;
 
@@ -11,4 +12,5 @@ public interface IUtilisateur
     Utilisateur Update(Utilisateur utilisateur);
     Utilisateur GetById(long id);
     Utilisateur Authentificate(string email, string password);
+    Task<RefreshTokenDto> RefreshTokenAsync(string token, string refreshToken);
 }

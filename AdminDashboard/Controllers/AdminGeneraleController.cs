@@ -1,9 +1,11 @@
 using AdminDashboard.Interfaces;
 using AdminDashboard.models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace AdminDashboard.Controllers
 {
+    
     [Route("api/[Controller]")]
     [ApiController]
     public class AdminGeneraleController : ControllerBase
@@ -21,7 +23,8 @@ namespace AdminDashboard.Controllers
         {
             return Ok(_adminGenerale.GetAll());
         }
-
+        
+        [Authorize]
         [HttpGet("{id}")]
         public IActionResult GetById(long id)
         {

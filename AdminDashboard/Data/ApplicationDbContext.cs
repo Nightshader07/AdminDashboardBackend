@@ -9,6 +9,7 @@ namespace AdminDashboard.Data;
             : base(options)
         {
         }
+        public DbSet<RefreshToken> RefreshTokens { get; set; }
         public DbSet<Utilisateur> Utilisateurs { get; set; }
         public DbSet<Employe> Employes { get; set; }
         public DbSet<AdminGenerale> AdminGenerales { get; set; }
