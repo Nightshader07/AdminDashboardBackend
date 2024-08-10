@@ -35,6 +35,8 @@ builder.Services.AddCors(options =>
 });
 builder.Services.AddScoped<IJwtService, JwtService>();
 builder.Services.AddScoped<IRefreshTokenService, RefreshTokenService>();
+builder.Services.AddScoped<ITache, TacheRepository>();
+builder.Services.AddScoped<IColumn, ColumnRepository>();
 builder.Services.AddScoped<IEmplyeRepository, EmployeRepository>();
 builder.Services.AddScoped<IRepresantantEntreprise, RepresantantEntrepriseRepository>();
 builder.Services.AddScoped<IAdminGenerale, AdminGeneraleRepository>();

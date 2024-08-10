@@ -21,4 +21,6 @@ public class Utilisateur
     
     [Phone]
     public String PhoneNumber { get; set; }
+
+    public ICollection<Tache> Taches { get; set; } = new List<Tache>();
 }

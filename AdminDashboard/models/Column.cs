@@ -11,4 +11,6 @@ public class Column
 
     [Required] 
     public String Name { get; set; }
+    
+    public ICollection<Tache> Taches { get; set; } = new List<Tache>();
 }

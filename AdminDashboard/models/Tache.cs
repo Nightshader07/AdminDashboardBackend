@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace AdminDashboard.models;
 
-public class Task
+public class Tache
 {
     [Key]
     [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
@@ -14,4 +14,17 @@ public class Task
     
     [Required] 
     public DateTime Deadline { get; set; }
+    
+    // Foreign key
+    [ForeignKey("Utilisateur")]
+    public long utilisateurId { get; set; }
+
+    // Navigation property
+    public  Utilisateur? Utilisateur { get; set; }
+    // Foreign key
+    [ForeignKey("Column")]
+    public long ColumnId { get; set; }
+
+    // Navigation property
+    public  Column? Column { get; set; }
 }
