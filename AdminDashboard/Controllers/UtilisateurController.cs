@@ -81,4 +81,29 @@ public class UtilisateurController : ControllerBase
             return Unauthorized(ex.Message);
         }
     }
+    [HttpPost("[action]")]
+    public IActionResult Authentificate([FromBody] String refreshToken)
+    {
+        try
+        {
+            var response = _utilisateur.IsTokenValid(refreshToken);
+            return Ok(response);
+        }
+        catch (SecurityTokenException ex)
+        {
+            return Unauthorized(ex.Message);
+        }
+    }
+    [HttpPost("logout")]
+    public async Task<IActionResult> Logout([FromBody] string refreshToken)
+    {
+        bool result = await _refreshTokenService.RevokeRefreshTokenAsync(refreshToken);
+    
+        if (!result)
+        {
+            return BadRequest("Invalid or already revoked token.");
+        }
+
+        return Ok(new { message = "Logged out successfully." });
+    }
 }

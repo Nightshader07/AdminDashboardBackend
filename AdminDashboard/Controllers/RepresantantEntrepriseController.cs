@@ -15,9 +15,9 @@ public class RepresantantEntrepriseController : ControllerBase
     }
     [Route("[action]")]
     [HttpGet]
-    public async Task<ActionResult<List<RepresentantEntreprise>>> GetAll()
+    public  ActionResult<List<RepresentantEntreprise>> GetAll()
     {
-        var represantants = await _represantantEntreprise.GetAll();
+        var represantants = _represantantEntreprise.GetAll();
         return Ok(represantants);
     }
 
@@ -44,7 +44,7 @@ public class RepresantantEntrepriseController : ControllerBase
     }
     [Route("[action]")]
     [HttpPost]
-    public async Task<ActionResult<RepresentantEntreprise>> Add([FromForm]RepresentantEntreprise representantEntreprise)
+    public async Task<ActionResult<RepresentantEntreprise>> Add([FromBody]RepresentantEntreprise representantEntreprise)
     {
         var addedRepresantant = await _represantantEntreprise.Add(representantEntreprise);
         return CreatedAtAction(nameof(GetById), new { id = addedRepresantant.Id }, addedRepresantant);
@@ -65,7 +65,7 @@ public class RepresantantEntrepriseController : ControllerBase
         return Ok(updatedRepresantant);
     }
 
-    [HttpDelete("[action]")]
+    [HttpDelete("{id}")]
     public async Task<ActionResult<RepresentantEntreprise>> RemoveById(long id)
     {
         var removedRepresantant = await _represantantEntreprise.RemoveById(id);
@@ -85,5 +85,21 @@ public class RepresantantEntrepriseController : ControllerBase
             return Unauthorized();
         }
         return Ok(represantant);
+    }
+    [HttpPost("upload")]
+    public async Task<IActionResult> Upload([FromForm] IFormFile file)
+    {
+        if (file == null || file.Length == 0)
+            return BadRequest("File not selected");
+
+        var path = Path.Combine("wwwroot/assets/logos", file.FileName);
+
+        using (var stream = new FileStream(path, FileMode.Create))
+        {
+            await file.CopyToAsync(stream);
+        }
+
+        // Return the relative path to the image
+        return Ok(new { path = $"/assets/logos/{file.FileName}" });
     }
 }

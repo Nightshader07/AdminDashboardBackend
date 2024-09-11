@@ -15,9 +15,9 @@ public class RepresantantEntrepriseRepository : IRepresantantEntreprise
         _context = context;
     }
 
-    public async Task<List<RepresentantEntreprise>> GetAll()
+    public List<RepresentantEntreprise> GetAll()
     {
-        return await _context.RepresentantEntreprises.ToListAsync();;
+        return _context.RepresentantEntreprises.ToList();;
     }
 
     public async Task<RepresentantEntreprise> GetByEmail(string email)

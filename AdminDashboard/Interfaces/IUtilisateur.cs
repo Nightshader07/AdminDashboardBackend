@@ -13,4 +13,5 @@ public interface IUtilisateur
     Utilisateur GetById(long id);
     Utilisateur Authentificate(string email, string password);
     Task<RefreshTokenDto> RefreshTokenAsync(string token, string refreshToken);
+    bool IsTokenValid(string refreshToken);
 }

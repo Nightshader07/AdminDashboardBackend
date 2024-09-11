@@ -4,7 +4,7 @@ namespace AdminDashboard.Interfaces;
 
 public interface IRepresantantEntreprise
 {
-    Task<List<RepresentantEntreprise>> GetAll();
+    List<RepresentantEntreprise> GetAll();
     Task<RepresentantEntreprise> GetByEmail(string email);
     Task<RepresentantEntreprise> Add(RepresentantEntreprise representantEntreprise);
     Task<RepresentantEntreprise> RemoveById(long id);

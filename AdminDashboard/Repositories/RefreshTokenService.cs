@@ -32,12 +32,12 @@ public class RefreshTokenService : IRefreshTokenService
         return refreshToken;
     }
 
-    public async Task<RefreshToken> GetRefreshTokenAsync(string token)
+    public RefreshToken GetRefreshToken(string token)
     {
-        return await _context.RefreshTokens.SingleOrDefaultAsync(rt => rt.Token == token && !rt.IsRevoked);
+        return _context.RefreshTokens.SingleOrDefault(rt => rt.Token == token && !rt.IsRevoked);
     }
 
-    public async Task RevokeRefreshTokenAsync(string token)
+    public async Task<bool> RevokeRefreshTokenAsync(string token)
     {
         var refreshToken = await _context.RefreshTokens.SingleOrDefaultAsync(rt => rt.Token == token);
         if (refreshToken != null)
@@ -45,6 +45,9 @@ public class RefreshTokenService : IRefreshTokenService
             refreshToken.IsRevoked = true;
             refreshToken.RevokedDate = DateTime.UtcNow;
             await _context.SaveChangesAsync();
+            return true;
         }
+
+        return false;
     }
 }

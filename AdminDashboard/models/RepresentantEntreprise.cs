@@ -4,7 +4,7 @@ namespace AdminDashboard.models;
 
 public class RepresentantEntreprise : Utilisateur
 {
-    [Url]
+    [Required]
     public string LogoURL { get; set; }
 
     [Required]

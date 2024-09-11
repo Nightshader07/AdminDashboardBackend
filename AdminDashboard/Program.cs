@@ -82,6 +82,7 @@ builder.Services.AddAuthentication(options =>
     };
 });
 builder.Services.AddAuthorization();
+
 // Build the app
 var app = builder.Build();
 
@@ -93,7 +94,8 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
-app.UseStaticFiles();
+app.UseStaticFiles(); // Ensure this is included
+
 app.UseRouting();
 app.UseCors("AllowAngularDev");
 
